@@ -3,7 +3,7 @@ const questions = {
   questions: [
     {
       front: "What is the nickname of FC Barcelona?",
-      back: "Barça",
+      back: "Barca",
       difficulty: "easy",
     },
     {
@@ -13,7 +13,7 @@ const questions = {
     },
     {
       front: "What are the traditional team colors of FC Barcelona?",
-      back: "Blue and red (known as 'Blaugrana')",
+      back: "Blaugrana",
       difficulty: "easy",
     },
     {

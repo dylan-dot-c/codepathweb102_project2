@@ -151,3 +151,50 @@ button:focus-visible {
   align-items: center;
   gap: 10px;
 }
+
+form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 1rem;
+
+  input {
+    background-color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 1rem;
+    color: black;
+  }
+
+  button {
+    background-color: green;
+    padding: 3px 10px;
+    font-size: 1rem;
+  }
+}
+
+.correct {
+  border: 2px solid green;
+  background-color: rgba(6, 206, 96, 0.767);
+  color: white;
+}
+
+.incorrect {
+  border: 2px solid red;
+  background-color: rgba(179, 29, 74, 0.726);
+  animation: shake 100ms ease 4;
+  color: white;
+  transform: translate(0px, 0px);
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translate(2px, 0px);
+  }
+
+  50% {
+    transform: translate(-2px, 0);
+  }
+}
