@@ -4,15 +4,34 @@ import { useState } from "react";
 
 const FlashcardQuiz = () => {
   const [currentCard, setCurrentCard] = useState(0);
-  const [quiz] = useState(questions);
+  const [quiz, setQuiz] = useState(questions.questions);
   const [isFlipped, setFlipped] = useState(false);
   const [answer, setAnswer] = useState("");
   const [attempted, setAttempted] = useState(false);
   const [correct, setCorrect] = useState(false);
 
+  const shuffleQuestions = () => {
+    let copyQuestions = quiz.slice();
+    console.log(copyQuestions, copyQuestions.length);
+
+    for (let i = 0; i < copyQuestions.length; i++) {
+      let temp = copyQuestions[i];
+      let randIndex = Math.floor(Math.random() * copyQuestions.length);
+
+      copyQuestions[i] = copyQuestions[randIndex];
+      copyQuestions[randIndex] = temp;
+    }
+
+    setQuiz(copyQuestions);
+    setAnswer("");
+    setAttempted(false);
+    setCorrect(false);
+    setFlipped(false);
+    setCurrentCard(0);
+  };
   const toggleCard = () => {
     if (attempted == false) {
-      alert("Atleast try befre you see the answer");
+      alert("Atleast try before you see the answer");
     } else {
       setFlipped(!isFlipped);
     }
@@ -45,6 +64,7 @@ const FlashcardQuiz = () => {
       }
       setAttempted(false);
       setCorrect(false);
+      setAnswer("");
     } else {
       alert("Please try before moving on!");
     }
@@ -64,10 +84,10 @@ const FlashcardQuiz = () => {
 
   return (
     <div>
-      <h4>Cards Remaining: {quiz.questions.length - currentCard}</h4>
+      <h4>Cards Remaining: {quiz.length - currentCard}</h4>
       <Card
         current={currentCard}
-        data={quiz.questions[currentCard]}
+        data={quiz[currentCard]}
         show={isFlipped}
         toggleCard={toggleCard}
       ></Card>
@@ -78,7 +98,7 @@ const FlashcardQuiz = () => {
         className="form"
         onSubmit={(e) => {
           e.preventDefault();
-          checkAnswer(quiz.questions[currentCard], answer);
+          checkAnswer(quiz[currentCard], answer);
         }}
       >
         <label htmlFor="answer">Guess: </label>
@@ -100,12 +120,11 @@ const FlashcardQuiz = () => {
         <button disabled={currentCard === 0} onClick={prevCard}>
           Prev
         </button>
-        <button
-          disabled={currentCard === quiz.questions.length - 1}
-          onClick={nextCard}
-        >
+        <button disabled={currentCard === quiz.length - 1} onClick={nextCard}>
           Next
         </button>
+        <br />
+        <button onClick={shuffleQuestions}>Shuffle</button>
       </div>
     </div>
   );
